@@ -1,10 +1,10 @@
 from collections import UserDict
 
 class Field:
-    def init(self, value):
+    def __init__(self, value):
         self.value = value
 
-    def str(self):
+    def __str__(self):
         return str(self.value)
 
 
@@ -13,14 +13,14 @@ class Name(Field):
 
 
 class Phone(Field):
-    def init(self, value):
+    def __init__(self, value):
         if not isinstance(value, str) or len(value) != 10 or not value.isdigit():
             raise ValueError("Phone number must be a string of 10 digits.")
-        super().init(value)
+        super().__init__(value)
 
 
 class Record:
-    def init(self, name):
+    def __init__(self, name):
         self.name = Name(name)
         self.phones = []
 
@@ -44,7 +44,7 @@ class Record:
             if phone.value == phone_number:
                 return phone
 
-    def str(self):
+    def __str__(self):
         phones_info = ', '.join(str(phone) for phone in self.phones)
         return f"Contact name: {self.name}, phones: {phones_info}"
 

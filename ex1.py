@@ -40,7 +40,7 @@ class Record:
         phone_numbers = "; ".join(str(phone) for phone in self.phones)
         return f"Contact name: {self.name}, phones: {phone_numbers}"
 
-class AddressBook:
+class AddressBook(UserDict):
     def __init__(self):
         self.data = {}
 
