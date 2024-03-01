@@ -26,15 +26,25 @@ class Record:
         self.phones.append(Phone(phone))
 
    
+            
     def edit_phone(self, old_phone, new_phone):
         found = False
         for phone in self.phones:
             if phone.value == old_phone:
+                # Add validation for new phone number here
+                if not self.is_valid_phone(new_phone):
+                    raise ValueError("Новий номер телефону недійсний.")
                 phone.value = new_phone
                 found = True
                 break
         if not found:
-            raise ValueError(f"Phone number {old_phone} not found in the contact.")
+            raise ValueError(f"Номер телефону {old_phone} не знайдено у контакті.")
+
+    def is_valid_phone(self, phone_number):
+        # Check if the phone number has exactly 10 digits
+        if len(phone_number) != 10 or not phone_number.isdigit():
+            raise ValueError("Номер телефону повинен містити рівно 10 цифр.")
+        return True
 
     def find_phone(self, phone):
         for p in self.phones:
